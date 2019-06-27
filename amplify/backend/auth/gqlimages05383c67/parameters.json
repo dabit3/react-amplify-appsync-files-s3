@@ -1,0 +1,68 @@
+{
+    "identityPoolName": "gqlimages05383c67_identitypool_05383c67",
+    "allowUnauthenticatedIdentities": true,
+    "lambdaLogPolicy": "gqlima_05383c67_lambda_log_policy",
+    "openIdLambdaRoleName": "gqlima_05383c67_openid_lambda_role",
+    "openIdRolePolicy": "gqlima_05383c67_openid_pass_role_policy",
+    "openIdLambdaIAMPolicy": "gqlima_05383c67_openid_lambda_iam_policy",
+    "openIdLogPolicy": "gqlima_05383c67_openid_lambda_log_policy",
+    "userPoolName": "gqlimages05383c67_userpool_05383c67",
+    "autoVerifiedAttributes": [
+        "email"
+    ],
+    "mfaConfiguration": "OFF",
+    "mfaTypes": [
+        "SMS Text Message"
+    ],
+    "roleName": "gqlima05383c67_sns-role",
+    "roleExternalId": "gqlima05383c67_role_external_id",
+    "policyName": "gqlima05383c67-sns-policy",
+    "smsAuthenticationMessage": "Your authentication code is {####}",
+    "smsVerificationMessage": "Your verification code is {####}",
+    "emailVerificationSubject": "Your verification code",
+    "emailVerificationMessage": "Your verification code is {####}",
+    "defaultPasswordPolicy": false,
+    "passwordPolicyMinLength": 8,
+    "passwordPolicyCharacters": [],
+    "requiredAttributes": [
+        "email"
+    ],
+    "userpoolClientName": "gqlima05383c67_app_client",
+    "userpoolClientGenerateSecret": true,
+    "userpoolClientRefreshTokenValidity": 30,
+    "userpoolClientWriteAttributes": [
+        "email"
+    ],
+    "userpoolClientReadAttributes": [
+        "email"
+    ],
+    "mfaLambdaRole": "gqlima05383c67_totp_lambda_role",
+    "mfaLambdaLogPolicy": "gqlima05383c67_totp_lambda_log_policy",
+    "mfaPassRolePolicy": "gqlima05383c67_totp_pass_role_policy",
+    "mfaLambdaIAMPolicy": "gqlima05383c67_totp_lambda_iam_policy",
+    "userpoolClientLambdaRole": "gqlima05383c67_userpoolclient_lambda_role",
+    "userpoolClientLogPolicy": "gqlima05383c67_userpoolclient_lambda_log_policy",
+    "userpoolClientLambdaPolicy": "gqlima05383c67_userpoolclient_lambda_iam_policy",
+    "userpoolClientSetAttributes": false,
+    "resourceName": "gqlimages05383c67",
+    "authSelections": "identityPoolAndUserPool",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    },
+    "unauthRoleArn": {
+        "Fn::GetAtt": [
+            "UnauthRole",
+            "Arn"
+        ]
+    },
+    "useDefault": "default"
+}

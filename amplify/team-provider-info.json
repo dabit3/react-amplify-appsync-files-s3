@@ -1,0 +1,19 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "gqlimages-dev-20190626171030-authRole",
+            "UnauthRoleArn": "arn:aws:iam::557458351015:role/gqlimages-dev-20190626171030-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::557458351015:role/gqlimages-dev-20190626171030-authRole",
+            "Region": "eu-central-1",
+            "DeploymentBucketName": "gqlimages-dev-20190626171030-deployment",
+            "UnauthRoleName": "gqlimages-dev-20190626171030-unauthRole",
+            "StackName": "gqlimages-dev-20190626171030",
+            "StackId": "arn:aws:cloudformation:eu-central-1:557458351015:stack/gqlimages-dev-20190626171030/f9d6b360-986f-11e9-98f2-02625fbcaeee"
+        },
+        "categories": {
+            "auth": {
+                "gqlimages05383c67": {}
+            }
+        }
+    }
+}
