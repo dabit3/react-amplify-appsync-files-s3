@@ -6,10 +6,11 @@ type Product @model {
   image: String
 }
 
-type User {
+type User @model {
   id: ID!
   username: String!
   avatar: S3Object
+  email: String
 }
 
 type S3Object {

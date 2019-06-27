@@ -31,3 +31,42 @@ export const deleteProduct = `mutation DeleteProduct($input: DeleteProductInput!
   }
 }
 `;
+export const createUser = `mutation CreateUser($input: CreateUserInput!) {
+  createUser(input: $input) {
+    id
+    username
+    avatar {
+      bucket
+      region
+      key
+    }
+    email
+  }
+}
+`;
+export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
+  updateUser(input: $input) {
+    id
+    username
+    avatar {
+      bucket
+      region
+      key
+    }
+    email
+  }
+}
+`;
+export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
+  deleteUser(input: $input) {
+    id
+    username
+    avatar {
+      bucket
+      region
+      key
+    }
+    email
+  }
+}
+`;

@@ -31,3 +31,42 @@ export const onDeleteProduct = `subscription OnDeleteProduct {
   }
 }
 `;
+export const onCreateUser = `subscription OnCreateUser {
+  onCreateUser {
+    id
+    username
+    avatar {
+      bucket
+      region
+      key
+    }
+    email
+  }
+}
+`;
+export const onUpdateUser = `subscription OnUpdateUser {
+  onUpdateUser {
+    id
+    username
+    avatar {
+      bucket
+      region
+      key
+    }
+    email
+  }
+}
+`;
+export const onDeleteUser = `subscription OnDeleteUser {
+  onDeleteUser {
+    id
+    username
+    avatar {
+      bucket
+      region
+      key
+    }
+    email
+  }
+}
+`;

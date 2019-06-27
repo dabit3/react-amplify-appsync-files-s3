@@ -28,3 +28,36 @@ export const listProducts = `query ListProducts(
   }
 }
 `;
+export const getUser = `query GetUser($id: ID!) {
+  getUser(id: $id) {
+    id
+    username
+    avatar {
+      bucket
+      region
+      key
+    }
+    email
+  }
+}
+`;
+export const listUsers = `query ListUsers(
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      username
+      avatar {
+        bucket
+        region
+        key
+      }
+      email
+    }
+    nextToken
+  }
+}
+`;
