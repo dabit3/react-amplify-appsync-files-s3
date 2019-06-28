@@ -58,7 +58,7 @@ amplify push
 npm start
 ```
 
-5. Change the bucket policy for files in the `images` folder to be public for the Product images to be viewable:
+5. Change the bucket policy [in your S3 bucket](https://s3.console.aws.amazon.com/s3/home) for files in the `images` folder to be public (in order for the Product images to be publicly viewable):
 
 ```json
 {
