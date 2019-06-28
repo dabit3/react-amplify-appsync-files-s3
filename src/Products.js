@@ -46,6 +46,7 @@ function App() {
           contentType: mimeType
         })
         await API.graphql(graphqlOperation(CreateProduct, { input: inputData }))
+        console.log('successfully created product!')
       } catch (err) {
         console.log('error: ', err)
       }
@@ -66,7 +67,7 @@ function App() {
       />
       <button
         style={styles.button}
-        onClick={createProduct}>Upload Image</button>
+        onClick={createProduct}>Create Product</button>
 
       {
         products.map((p, i) => (
