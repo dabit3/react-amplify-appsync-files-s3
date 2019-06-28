@@ -3,7 +3,7 @@ import { Storage, API, graphqlOperation } from 'aws-amplify'
 import uuid from 'uuid/v4'
 import { withAuthenticator } from 'aws-amplify-react'
 
-import { createProduct } from './graphql/mutations'
+import { createProduct as CreateProduct } from './graphql/mutations'
 import { listProducts as ListProducts } from './graphql/queries'
 import config from './aws-exports'
 
@@ -45,7 +45,7 @@ function App() {
         await Storage.put(key, file, {
           contentType: mimeType
         })
-        await API.graphql(graphqlOperation(createProduct, { input: inputData }))
+        await API.graphql(graphqlOperation(CreateProduct, { input: inputData }))
       } catch (err) {
         console.log('error: ', err)
       }
