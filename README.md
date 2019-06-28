@@ -100,6 +100,8 @@ export default App;
 
 ### Amplify Console
 
+Click the button to deploy this application to the Amplify console.
+
 [![amplifybutton](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/dabit3/react-amplify-appsync-files-s3)
 
 Then change the bucket policy [in your S3 bucket](https://s3.console.aws.amazon.com/s3/home) for files in the `images` folder to be public (in order for the Product images to be publicly viewable):
