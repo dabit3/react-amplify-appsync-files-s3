@@ -40,7 +40,6 @@ export const onCreateUser = `subscription OnCreateUser {
       region
       key
     }
-    email
   }
 }
 `;
@@ -53,7 +52,6 @@ export const onUpdateUser = `subscription OnUpdateUser {
       region
       key
     }
-    email
   }
 }
 `;
@@ -66,7 +64,6 @@ export const onDeleteUser = `subscription OnDeleteUser {
       region
       key
     }
-    email
   }
 }
 `;

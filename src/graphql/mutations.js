@@ -40,7 +40,6 @@ export const createUser = `mutation CreateUser($input: CreateUserInput!) {
       region
       key
     }
-    email
   }
 }
 `;
@@ -53,7 +52,6 @@ export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
       region
       key
     }
-    email
   }
 }
 `;
@@ -66,7 +64,6 @@ export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
       region
       key
     }
-    email
   }
 }
 `;

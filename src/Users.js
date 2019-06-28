@@ -1,17 +1,16 @@
 import React, { useState, useReducer, useEffect } from 'react'
-import './App.css'
 import { withAuthenticator } from 'aws-amplify-react'
-import { Storage, Auth, API, graphqlOperation } from 'aws-amplify'
+import { Storage, API, graphqlOperation } from 'aws-amplify'
 import uuid from 'uuid/v4'
 import { createUser as CreateUser } from './graphql/mutations'
 import { listUsers } from './graphql/queries'
 import { onCreateUser } from './graphql/subscriptions'
-import ampConfig from './aws-exports'
+import config from './aws-exports'
 
 const {
   aws_user_files_s3_bucket_region: region,
   aws_user_files_s3_bucket: bucket
-} = ampConfig
+} = config
 
 const initialState = {
   users: []
@@ -97,7 +96,7 @@ function App() {
   }, [])
 
   return (
-    <div className="App" style={styles.container}>
+    <div style={styles.container}>
       <input
         label="File to upload"
         type="file"

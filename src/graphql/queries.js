@@ -37,7 +37,6 @@ export const getUser = `query GetUser($id: ID!) {
       region
       key
     }
-    email
   }
 }
 `;
@@ -55,7 +54,6 @@ export const listUsers = `query ListUsers(
         region
         key
       }
-      email
     }
     nextToken
   }

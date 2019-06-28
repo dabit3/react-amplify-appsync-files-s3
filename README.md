@@ -11,9 +11,9 @@ How do I upload images using GraphQL with AWS AppSync?
 There are a few parts to this solution:
 
 * You must first upload the image to a storage solution (Amazon S3)
-* After you have finished uploading the image, you will then be given a `key` to reference this image. You then need to store this reference in a database using a GraphQL mutation.
-* When you want to a public image (public bucket), you need to:
-  * Query the image reference from your database using GraphQL
+* After you have finished uploading the image, you will need to store a reference to this image in a database using a GraphQL mutation.
+* When you want to view a public image (public bucket), you need to:
+  * Query the image URL from your database using GraphQL
 * When you want to view a private image (non-public bucket), you need to do two things:
   * First, query the image reference from your database using GraphQL
   * Get a signed URL for the image from S3
