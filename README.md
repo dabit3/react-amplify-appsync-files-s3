@@ -4,6 +4,8 @@ This is an example project showing how to upload and download files and images u
 
 ![How to upload files and images with GraphQL](header.jpg)
 
+This project goes along with the [GraphQL Tutorial - How to Manage Image & File Uploads & Downloads with AWS AppSync & AWS Amplify](https://dev.to/dabit3/graphql-tutorial-how-to-manage-image-file-uploads-downloads-with-aws-appsync-aws-amplify-hga) on [Dev.to](https://dev.to/).
+
 ### The question
 
 How do I upload images and files using GraphQL with AWS AppSync?
