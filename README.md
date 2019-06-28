@@ -4,7 +4,7 @@ This is an example project showing how to upload and download files and images f
 
 ### The question
 
-How do I upload images using GraphQL with AWS AppSync?
+How do I upload images and files using GraphQL with AWS AppSync?
 
 ### The solution
 
