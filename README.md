@@ -37,7 +37,7 @@ In this example, I show how to:
 ```sh
 git clone https://github.com/dabit3/react-amplify-appsync-files-s3.git
 
-cd react-amplify-appsync-s3
+cd react-amplify-appsync-files-s3
 ```
 
 2. Install the dependencies
