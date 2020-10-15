@@ -1,6 +1,6 @@
 ## File uploads and downloads with React, AWS Amplify, AWS AppSync, and Amazon S3
 
-This is an example project showing how to upload and download files and images using AWS Amplify, AWS AppSync, and Amazon S3
+This is an example project of showing how to upload and download files and images using AWS Amplify, AWS AppSync, and Amazon S3
 
 ![How to upload files and images with GraphQL](header.jpg)
 
