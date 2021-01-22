@@ -1,69 +1,159 @@
-// eslint-disable
+/* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createProduct = `mutation CreateProduct($input: CreateProductInput!) {
-  createProduct(input: $input) {
-    id
-    name
-    description
-    price
-    image
-  }
-}
-`;
-export const updateProduct = `mutation UpdateProduct($input: UpdateProductInput!) {
-  updateProduct(input: $input) {
-    id
-    name
-    description
-    price
-    image
-  }
-}
-`;
-export const deleteProduct = `mutation DeleteProduct($input: DeleteProductInput!) {
-  deleteProduct(input: $input) {
-    id
-    name
-    description
-    price
-    image
-  }
-}
-`;
-export const createUser = `mutation CreateUser($input: CreateUserInput!) {
-  createUser(input: $input) {
-    id
-    username
-    avatar {
-      bucket
-      region
-      key
+export const createProduct = /* GraphQL */ `
+  mutation CreateProduct(
+    $input: CreateProductInput!
+    $condition: ModelProductConditionInput
+  ) {
+    createProduct(input: $input, condition: $condition) {
+      id
+      name
+      description
+      price
+      image
+      createdAt
+      updatedAt
     }
   }
-}
 `;
-export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
-  updateUser(input: $input) {
-    id
-    username
-    avatar {
-      bucket
-      region
-      key
+export const updateProduct = /* GraphQL */ `
+  mutation UpdateProduct(
+    $input: UpdateProductInput!
+    $condition: ModelProductConditionInput
+  ) {
+    updateProduct(input: $input, condition: $condition) {
+      id
+      name
+      description
+      price
+      image
+      createdAt
+      updatedAt
     }
   }
-}
 `;
-export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
-  deleteUser(input: $input) {
-    id
-    username
-    avatar {
-      bucket
-      region
-      key
+export const deleteProduct = /* GraphQL */ `
+  mutation DeleteProduct(
+    $input: DeleteProductInput!
+    $condition: ModelProductConditionInput
+  ) {
+    deleteProduct(input: $input, condition: $condition) {
+      id
+      name
+      description
+      price
+      image
+      createdAt
+      updatedAt
     }
   }
-}
+`;
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    createUser(input: $input, condition: $condition) {
+      id
+      username
+      avatar {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateUser = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      id
+      username
+      avatar {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteUser = /* GraphQL */ `
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    deleteUser(input: $input, condition: $condition) {
+      id
+      username
+      avatar {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createDocument = /* GraphQL */ `
+  mutation CreateDocument(
+    $input: CreateDocumentInput!
+    $condition: ModelDocumentConditionInput
+  ) {
+    createDocument(input: $input, condition: $condition) {
+      id
+      docname
+      docimage {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateDocument = /* GraphQL */ `
+  mutation UpdateDocument(
+    $input: UpdateDocumentInput!
+    $condition: ModelDocumentConditionInput
+  ) {
+    updateDocument(input: $input, condition: $condition) {
+      id
+      docname
+      docimage {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteDocument = /* GraphQL */ `
+  mutation DeleteDocument(
+    $input: DeleteDocumentInput!
+    $condition: ModelDocumentConditionInput
+  ) {
+    deleteDocument(input: $input, condition: $condition) {
+      id
+      docname
+      docimage {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
 `;

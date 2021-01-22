@@ -1,23 +1,30 @@
 {
-	"auth": {
-		"gqlimages05383c67": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation"
-		}
-	},
-	"storage": {
-		"gqls3": {
-			"service": "S3",
-			"providerPlugin": "awscloudformation"
-		}
-	},
-	"api": {
-		"gqlimages": {
-			"service": "AppSync",
-			"providerPlugin": "awscloudformation",
-			"output": {
-				"securityType": "API_KEY"
-			}
-		}
-	}
+  "auth": {
+    "gqlimages05383c67": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation"
+    }
+  },
+  "storage": {
+    "gqls3": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
+  },
+  "api": {
+    "gqlimages": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "securityType": "API_KEY"
+      }
+    }
+  },
+  "hosting": {
+    "amplifyhosting": {
+      "service": "amplifyhosting",
+      "providerPlugin": "awscloudformation",
+      "type": "manual"
+    }
+  }
 }

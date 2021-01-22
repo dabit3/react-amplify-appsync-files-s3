@@ -1,52 +1,42 @@
-// eslint-disable
+/* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getProduct = `query GetProduct($id: ID!) {
-  getProduct(id: $id) {
-    id
-    name
-    description
-    price
-    image
-  }
-}
-`;
-export const listProducts = `query ListProducts(
-  $filter: ModelProductFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listProducts(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
+export const getProduct = /* GraphQL */ `
+  query GetProduct($id: ID!) {
+    getProduct(id: $id) {
       id
       name
       description
       price
       image
-    }
-    nextToken
-  }
-}
-`;
-export const getUser = `query GetUser($id: ID!) {
-  getUser(id: $id) {
-    id
-    username
-    avatar {
-      bucket
-      region
-      key
+      createdAt
+      updatedAt
     }
   }
-}
 `;
-export const listUsers = `query ListUsers(
-  $filter: ModelUserFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
+export const listProducts = /* GraphQL */ `
+  query ListProducts(
+    $filter: ModelProductFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listProducts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        description
+        price
+        image
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
       id
       username
       avatar {
@@ -54,8 +44,67 @@ export const listUsers = `query ListUsers(
         region
         key
       }
+      createdAt
+      updatedAt
     }
-    nextToken
   }
-}
+`;
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        username
+        avatar {
+          bucket
+          region
+          key
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getDocument = /* GraphQL */ `
+  query GetDocument($id: ID!) {
+    getDocument(id: $id) {
+      id
+      docname
+      docimage {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listDocuments = /* GraphQL */ `
+  query ListDocuments(
+    $filter: ModelDocumentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listDocuments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        docname
+        docimage {
+          bucket
+          region
+          key
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
 `;

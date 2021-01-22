@@ -12,6 +12,12 @@ type User @model {
   avatar: S3Object
 }
 
+type Document @model {
+  id: ID!
+  docname: String!
+  docimage: S3Object
+}
+
 type S3Object {
   bucket: String!
   region: String!
