@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect } from 'react'
+import React, { useState, useReducer, useEffect, useRef } from 'react'
 import { withAuthenticator } from 'aws-amplify-react'
 import { Storage, API, graphqlOperation } from 'aws-amplify'
 import { createDocument as CreateDocument } from './graphql/mutations'
@@ -6,6 +6,9 @@ import { listDocuments } from './graphql/queries'
 import { onCreateDocument } from './graphql/subscriptions'
 import config from './aws-exports'
 import uuid from 'uuid/v4'
+import Popup from "reactjs-popup";
+import SignaturePad from "react-signature-canvas";
+import './sigCanvas.css';
 
 const {
   aws_user_files_s3_bucket_region: region,
@@ -28,10 +31,31 @@ function reducer(state, action) {
 }
 
 function App() {
+  const [imageURL, setImageURL] = useState(null); // create a state that will contain our image url
+  const sigCanvas = useRef({}); //create a ref using react useRef hook
   const [file, updateFile] = useState(null)
   const [docname, updateDocname] = useState('')
   const [state, dispatch] = useReducer(reducer, initialState)
   const [documentUrl, updateDocumentUrl] = useState('')
+
+    /* a function that uses the canvas ref to clear the canvas via a method given by react-signature-canvas
+  */
+ const clear = () => sigCanvas.current.clear();
+
+  async function upload() {
+    const { name: fileName, type: mimeType } = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png");
+    const key = `${uuid()}${fileName}`
+    const fileForUpload = {
+      bucket,
+      key,
+      region,
+    }
+    const inputData = { docname, docimage: fileForUpload }
+    await Storage.put(key, file, {
+      contentType: mimeType
+    })
+    setImageURL(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png"));
+  };
 
   function handleChange(event) {
     const { target: { value, files } } = event
@@ -126,8 +150,42 @@ function App() {
       }
       <img
         src={documentUrl}
-        style={{ width: 300 }}
+        style={{ width: 1000 }}
       />
+      <h1>Signature Pad Example</h1>
+      <Popup 
+        modal 
+        trigger={<button>Open Signature Pad</button>}
+        closeOnDocumentClick={false}
+      >
+        {close => (
+          <>
+          <SignaturePad 
+            ref={sigCanvas}
+            canvasProps={{
+              className: "signatureCanvas"
+            }}
+          />
+          <button onClick={upload}>Save</button>
+          <button onClick={clear}>clear</button>
+          <button onClick={close}>close</button>
+          </>
+        )}
+      </Popup>
+      <br />
+      <br />
+      { imageURL ? (
+        <img
+          src={imageURL}
+          alt="my signature"
+          style= {{
+            display: "block",
+            margin: "0 auto",
+            border: "1px solid black",
+            width: "150px"
+          }}
+        />
+      ) : null}
     </div>
   )
 
