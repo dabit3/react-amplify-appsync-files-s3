@@ -3,14 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.3.0",
     "aws-amplify": "^1.1.29",
     "aws-amplify-react": "^2.3.9",
+    "image-downloader": "^4.0.2",
     "merge-images": "^2.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
     "react-signature-canvas": "^1.0.3",
-    "reactjs-popup": "^2.0.4"
+    "reactjs-popup": "^2.0.4",
+    "request": "^2.88.2"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -20,7 +20,7 @@ const initialState = {
   documents: []
 }
 
-const currentDocOpen;
+var currentDocOpen = [];
 
 function reducer(state, action) {
   switch(action.type) {
@@ -45,22 +45,74 @@ function App() {
   */
  const clear = () => sigCanvas.current.clear();
 
+  function getDataUrl(img) {
+    // Create canvas
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    // Set width and height
+    canvas.width = img.width;
+    canvas.height = img.height;
+    // Draw the image
+    ctx.drawImage(img, 0, 0);
+    return canvas.toDataURL('image/jpeg');
+  }
+
   async function upload() {
-    let mergedDoc = mergeImages(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png"), currentDocOpen).then(b64 => document.querySelector('img').src = b64);
-    //const { name: fileName, type: mimeType } = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png");
-    const { name: fileName, type: mimeType } = mergedDoc.toDataURL("image/png");
-    const key = `${uuid()}${fileName}`
-    const fileForUpload = {
-      bucket,
-      key,
-      region,
+    console.log(documentUrl);
+    /*const download = require('image-downloader')
+
+    const options = {
+      url: documentUrl,
+      dest: '/tmpimg/tmpdoc'                // will be saved to /path/to/dest/image.jpg
     }
-    const inputData = { docname, docimage: fileForUpload }
-    await Storage.put(key, file, {
-      contentType: mimeType
-    })
-    //setImageURL(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png"));
-    setImageURL(mergedDoc.toDataURL("image/png"));
+
+    download.image(options)
+      .then(({ filename }) => {
+        console.log('Saved to', filename)  // saved to /path/to/dest/image.jpg
+      })
+      .catch((err) => console.error(err))*/
+    //var docOpen = document.getElementById('currentDoc');
+    //var myimg = docOpen.getElementsByTagName('img')[0];
+    var mysrc1 = documentUrl.split("public/");
+    var mysrc2 = mysrc1[1].split("?");
+    //console.log(mysrc2[0]);
+    var awsimg = new Image();
+    //document.write();
+    var s3 = new AWS.S3();
+    s3.getObject(
+      { Bucket: bucket, Key: mysrc2[0] },
+      function (error, data) {
+        if (error != null) {
+          alert("Failed to retrieve an object: " + error);
+        } else {
+          alert("Loaded " + data.ContentLength + " bytes");
+          // do something with data.Body
+          awsimg = data.Body;
+        }
+      }
+    );
+    try {
+      //awsimg = fetchImage(mysrc2[0]);
+      //awsimg.src = documentUrl;
+      let sigimg = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png");
+      let mergedDoc = mergeImages([awsimg, sigimg]);
+        //const { name: fileName, type: mimeType } = sigCanvas.current.getTrimmedCanvas().toDataURL("image/jpeg");
+      const { name: fileName, type: mimeType } = mergedDoc;
+      const key = `${uuid()}${fileName}`
+      const fileForUpload = {
+        bucket,
+        key,
+        region,
+      }
+      //const inputData = { docname, docimage: fileForUpload }
+      await Storage.put(key, file, {
+        contentType: mimeType
+      })
+      //setImageURL(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png"));
+      setImageURL(mergedDoc.toDataURL("image/png"));
+    } catch (err) {
+      console.log('error: ', err)
+    }
   };
 
   function handleChange(event) {
@@ -143,9 +195,8 @@ function App() {
         onClick={createDocument}>Save Document</button>
       {
         state.documents.map((u, i) => {
-          currentDocOpen = fetchImage(u.docimage.key);
           return (
-            <div
+            <div id={u.docimage.key}
               key={i}
             >
               <p
@@ -155,10 +206,12 @@ function App() {
           )
         })
       }
+      <div id="currentDoc">
       <img
         src={documentUrl}
         style={{ width: 1000 }}
       />
+      </div>
       <h1>Signature Pad Example</h1>
       <Popup 
         modal 
