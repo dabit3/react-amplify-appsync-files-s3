@@ -108,3 +108,40 @@ export const listDocuments = /* GraphQL */ `
     }
   }
 `;
+export const getSignedDocument = /* GraphQL */ `
+  query GetSignedDocument($id: ID!) {
+    getSignedDocument(id: $id) {
+      id
+      signdocname
+      signdocimage {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listSignedDocuments = /* GraphQL */ `
+  query ListSignedDocuments(
+    $filter: ModelSignedDocumentFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSignedDocuments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        signdocname
+        signdocimage {
+          bucket
+          region
+          key
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

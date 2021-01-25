@@ -9,6 +9,7 @@ import uuid from 'uuid/v4'
 import Popup from "reactjs-popup";
 import SignaturePad from "react-signature-canvas";
 import './sigCanvas.css';
+import mergeImages from 'merge-images';
 
 const {
   aws_user_files_s3_bucket_region: region,
@@ -18,6 +19,8 @@ const {
 const initialState = {
   documents: []
 }
+
+const currentDocOpen;
 
 function reducer(state, action) {
   switch(action.type) {
@@ -43,7 +46,9 @@ function App() {
  const clear = () => sigCanvas.current.clear();
 
   async function upload() {
-    const { name: fileName, type: mimeType } = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png");
+    let mergedDoc = mergeImages(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png"), currentDocOpen).then(b64 => document.querySelector('img').src = b64);
+    //const { name: fileName, type: mimeType } = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png");
+    const { name: fileName, type: mimeType } = mergedDoc.toDataURL("image/png");
     const key = `${uuid()}${fileName}`
     const fileForUpload = {
       bucket,
@@ -54,7 +59,8 @@ function App() {
     await Storage.put(key, file, {
       contentType: mimeType
     })
-    setImageURL(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png"));
+    //setImageURL(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png"));
+    setImageURL(mergedDoc.toDataURL("image/png"));
   };
 
   function handleChange(event) {
@@ -137,6 +143,7 @@ function App() {
         onClick={createDocument}>Save Document</button>
       {
         state.documents.map((u, i) => {
+          currentDocOpen = fetchImage(u.docimage.key);
           return (
             <div
               key={i}
@@ -166,6 +173,7 @@ function App() {
               className: "signatureCanvas"
             }}
           />
+          
           <button onClick={upload}>Save</button>
           <button onClick={clear}>clear</button>
           <button onClick={close}>close</button>

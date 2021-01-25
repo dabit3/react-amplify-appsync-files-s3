@@ -157,3 +157,57 @@ export const deleteDocument = /* GraphQL */ `
     }
   }
 `;
+export const createSignedDocument = /* GraphQL */ `
+  mutation CreateSignedDocument(
+    $input: CreateSignedDocumentInput!
+    $condition: ModelSignedDocumentConditionInput
+  ) {
+    createSignedDocument(input: $input, condition: $condition) {
+      id
+      signdocname
+      signdocimage {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateSignedDocument = /* GraphQL */ `
+  mutation UpdateSignedDocument(
+    $input: UpdateSignedDocumentInput!
+    $condition: ModelSignedDocumentConditionInput
+  ) {
+    updateSignedDocument(input: $input, condition: $condition) {
+      id
+      signdocname
+      signdocimage {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteSignedDocument = /* GraphQL */ `
+  mutation DeleteSignedDocument(
+    $input: DeleteSignedDocumentInput!
+    $condition: ModelSignedDocumentConditionInput
+  ) {
+    deleteSignedDocument(input: $input, condition: $condition) {
+      id
+      signdocname
+      signdocimage {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;

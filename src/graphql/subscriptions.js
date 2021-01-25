@@ -130,3 +130,48 @@ export const onDeleteDocument = /* GraphQL */ `
     }
   }
 `;
+export const onCreateSignedDocument = /* GraphQL */ `
+  subscription OnCreateSignedDocument {
+    onCreateSignedDocument {
+      id
+      signdocname
+      signdocimage {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateSignedDocument = /* GraphQL */ `
+  subscription OnUpdateSignedDocument {
+    onUpdateSignedDocument {
+      id
+      signdocname
+      signdocimage {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteSignedDocument = /* GraphQL */ `
+  subscription OnDeleteSignedDocument {
+    onDeleteSignedDocument {
+      id
+      signdocname
+      signdocimage {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
