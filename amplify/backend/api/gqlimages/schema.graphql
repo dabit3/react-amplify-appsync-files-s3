@@ -18,6 +18,12 @@ type Document @model {
   docimage: S3Object
 }
 
+type SignedDocument @model {
+  id: ID!
+  signdocname: String!
+  signdocimage: S3Object
+}
+
 type S3Object {
   bucket: String!
   region: String!

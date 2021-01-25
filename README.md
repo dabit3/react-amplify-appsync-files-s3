@@ -1,10 +1,6 @@
 ## File uploads and downloads with React, AWS Amplify, AWS AppSync, and Amazon S3
 
-This is an example project showing how to upload and download files and images using AWS Amplify, AWS AppSync, and Amazon S3
-
-![How to upload files and images with GraphQL](header.jpg)
-
-This project goes along with the [GraphQL Tutorial - How to Manage Image & File Uploads & Downloads with AWS AppSync & AWS Amplify](https://dev.to/dabit3/graphql-tutorial-how-to-manage-image-file-uploads-downloads-with-aws-appsync-aws-amplify-hga) on [Dev.to](https://dev.to/).
+This is an example project showing how to upload and download files and images using AWS Amplify, AWS AppSync, and Amazon S3. This example also shows how to use signature canvas and merge-images to upload and create signed documents and store these signed documents in Amazon S3.
 
 ### The question
 
@@ -22,12 +18,6 @@ There are a few parts to this solution:
   * First, query the image reference from your database using GraphQL
   * Get a signed URL for the image from S3
 
-In this example, I show how to:
-
-1. Store images using GraphQL, AppSync, and S3 (both using public and private access)
-2. Fetch a list of images and render them in a React application
-2. Fetch a single image and render it in a React application
-
 ## To deploy this app
 
 ### Amplify CLI
@@ -35,7 +25,7 @@ In this example, I show how to:
 1. Clone the project and change into the directory
 
 ```sh
-git clone https://github.com/dabit3/react-amplify-appsync-files-s3.git
+git clone https://github.com/sarahvardyrsi/react-amplify-appsync-files-s3.git
 
 cd react-amplify-appsync-s3
 ```
@@ -102,7 +92,7 @@ export default App;
 
 Click the button to deploy this application to the Amplify console.
 
-[![amplifybutton](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/dabit3/react-amplify-appsync-files-s3)
+[![amplifybutton](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/sarahvardyrsi/react-amplify-appsync-files-s3.git)
 
 Then change the bucket policy [in your S3 bucket](https://s3.console.aws.amazon.com/s3/home) for files in the `images` folder to be public (in order for the Product images to be publicly viewable):
 
