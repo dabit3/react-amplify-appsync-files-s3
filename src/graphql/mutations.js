@@ -116,17 +116,7 @@ export const createSignature = /* GraphQL */ `
   ) {
     createSignature(input: $input, condition: $condition) {
       id
-      user {
-        id
-        username
-        avatar {
-          bucket
-          region
-          key
-        }
-        createdAt
-        updatedAt
-      }
+      username
       sigimage {
         bucket
         region
@@ -144,17 +134,7 @@ export const updateSignature = /* GraphQL */ `
   ) {
     updateSignature(input: $input, condition: $condition) {
       id
-      user {
-        id
-        username
-        avatar {
-          bucket
-          region
-          key
-        }
-        createdAt
-        updatedAt
-      }
+      username
       sigimage {
         bucket
         region
@@ -172,17 +152,7 @@ export const deleteSignature = /* GraphQL */ `
   ) {
     deleteSignature(input: $input, condition: $condition) {
       id
-      user {
-        id
-        username
-        avatar {
-          bucket
-          region
-          key
-        }
-        createdAt
-        updatedAt
-      }
+      username
       sigimage {
         bucket
         region

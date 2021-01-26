@@ -95,17 +95,7 @@ export const onCreateSignature = /* GraphQL */ `
   subscription OnCreateSignature {
     onCreateSignature {
       id
-      user {
-        id
-        username
-        avatar {
-          bucket
-          region
-          key
-        }
-        createdAt
-        updatedAt
-      }
+      username
       sigimage {
         bucket
         region
@@ -120,17 +110,7 @@ export const onUpdateSignature = /* GraphQL */ `
   subscription OnUpdateSignature {
     onUpdateSignature {
       id
-      user {
-        id
-        username
-        avatar {
-          bucket
-          region
-          key
-        }
-        createdAt
-        updatedAt
-      }
+      username
       sigimage {
         bucket
         region
@@ -145,17 +125,7 @@ export const onDeleteSignature = /* GraphQL */ `
   subscription OnDeleteSignature {
     onDeleteSignature {
       id
-      user {
-        id
-        username
-        avatar {
-          bucket
-          region
-          key
-        }
-        createdAt
-        updatedAt
-      }
+      username
       sigimage {
         bucket
         region

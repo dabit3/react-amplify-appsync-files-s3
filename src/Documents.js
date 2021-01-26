@@ -12,6 +12,7 @@ import uuid from 'uuid/v4'
 import Popup from "reactjs-popup";
 import SignaturePad from "react-signature-canvas";
 import './sigCanvas.css';
+import { Auth } from 'aws-amplify';
 
 const {
   aws_user_files_s3_bucket_region: region,
@@ -35,7 +36,21 @@ function reducer(state, action) {
   }
 }
 
+var username = ""
+
 function App() {
+  Auth.currentSession().then(res=>{
+    let accessToken = res.getAccessToken()
+    let jwt = accessToken.getJwtToken()
+    //You can print them to see the full objects
+    console.log(`myAccessToken: ${JSON.stringify(accessToken)}`)
+    console.log(`myJwt: ${jwt}`)
+    let accesstokenstring = JSON.stringify(accessToken);
+    let accessbreak1 = accesstokenstring.split(`username":"`);
+    let accessbreak2 = accessbreak1[1].split(`"}}`)
+    username = accessbreak2[0];
+    console.log(`username: ${username}`)
+  })
   const [imageURL, setImageURL] = useState(null) // create a state that will contain our image url
   const sigCanvas = useRef({}) //create a ref using react useRef hook
   const [file, updateFile] = useState(null)
@@ -77,24 +92,25 @@ function App() {
      */
   }
 
-  async function createSignature(event) {
-        const { type: mimeType } = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png")
-        const key = `${uuid()}-signature`
-        const fileForUpload = {
-            bucket,
-            key,
-            region,
-        }
-        const inputData = { sigimage: fileForUpload }
-        try {
-          await Storage.put(key, sigCanvas.current.getTrimmedCanvas().toDataURL("image/png"), {
-            contentType: mimeType
-          })
-          await API.graphql(graphqlOperation(CreateSignature, { input: inputData }))
-          console.log('successfully stored signature data!')
-        } catch (err) {
-          console.log('error: ', err)
-        }
+  async function createSignature() {
+   
+    const { type: mimeType } = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png")
+    const key = `${uuid()}-${username}-signature`
+    const fileForUpload = {
+        bucket,
+        key,
+        region,
+    }
+    const inputData = { username: username, sigimage: fileForUpload }
+    try {
+      await Storage.put(key, sigCanvas.current.getTrimmedCanvas().toDataURL("image/png"), {
+        contentType: mimeType
+      })
+      await API.graphql(graphqlOperation(CreateSignature, { input: inputData }))
+      console.log('successfully stored signature data!')
+    } catch (err) {
+      console.log('error: ', err)
+    }
   }
 
   async function createDocument(event) {

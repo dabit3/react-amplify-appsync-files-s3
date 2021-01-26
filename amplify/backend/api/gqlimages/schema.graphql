@@ -12,7 +12,7 @@ type Document @model {
 
 type Signature @model {
   id: ID!
-  user: User
+  username: String!
   sigimage: S3Object
 }
 

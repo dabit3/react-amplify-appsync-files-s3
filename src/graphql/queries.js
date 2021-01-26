@@ -79,17 +79,7 @@ export const getSignature = /* GraphQL */ `
   query GetSignature($id: ID!) {
     getSignature(id: $id) {
       id
-      user {
-        id
-        username
-        avatar {
-          bucket
-          region
-          key
-        }
-        createdAt
-        updatedAt
-      }
+      username
       sigimage {
         bucket
         region
@@ -109,12 +99,7 @@ export const listSignatures = /* GraphQL */ `
     listSignatures(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        user {
-          id
-          username
-          createdAt
-          updatedAt
-        }
+        username
         sigimage {
           bucket
           region
