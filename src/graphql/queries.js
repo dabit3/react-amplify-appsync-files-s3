@@ -112,7 +112,6 @@ export const getSignedDocument = /* GraphQL */ `
   query GetSignedDocument($id: ID!) {
     getSignedDocument(id: $id) {
       id
-      signdocname
       signdocimage {
         bucket
         region
@@ -132,7 +131,6 @@ export const listSignedDocuments = /* GraphQL */ `
     listSignedDocuments(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        signdocname
         signdocimage {
           bucket
           region

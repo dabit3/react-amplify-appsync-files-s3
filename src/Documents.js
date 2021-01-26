@@ -4,6 +4,9 @@ import { Storage, API, graphqlOperation } from 'aws-amplify'
 import { createDocument as CreateDocument } from './graphql/mutations'
 import { listDocuments } from './graphql/queries'
 import { onCreateDocument } from './graphql/subscriptions'
+import { createSignedDocument as CreateSignedDocument } from './graphql/mutations'
+import { listSignedDocuments } from './graphql/queries'
+import { onCreateSignedDocument } from './graphql/subscriptions'
 import config from './aws-exports'
 import uuid from 'uuid/v4'
 import Popup from "reactjs-popup";
@@ -45,7 +48,7 @@ function App() {
   */
  const clear = () => sigCanvas.current.clear();
 
-  function getDataUrl(img) {
+  /*function getDataUrl(img) {
     // Create canvas
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
@@ -55,7 +58,7 @@ function App() {
     // Draw the image
     ctx.drawImage(img, 0, 0);
     return canvas.toDataURL('image/jpeg');
-  }
+  }*/
 
   async function upload() {
     console.log(documentUrl);
@@ -78,7 +81,14 @@ function App() {
     //console.log(mysrc2[0]);
     var awsimg = new Image();
     //document.write();
-    var s3 = new AWS.S3();
+    try {
+      const imageData = await Storage.get(mysrc2[0])
+      awsimg = imageData.Body
+      alert("Loaded " + imageData.ContentLength + " bytes");
+    } catch(err) {
+      console.log('error: ', err)
+    }
+    /*var s3 = new config.S3();
     s3.getObject(
       { Bucket: bucket, Key: mysrc2[0] },
       function (error, data) {
@@ -90,14 +100,16 @@ function App() {
           awsimg = data.Body;
         }
       }
-    );
+    );*/
     try {
       //awsimg = fetchImage(mysrc2[0]);
       //awsimg.src = documentUrl;
       let sigimg = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png");
-      let mergedDoc = mergeImages([awsimg, sigimg]);
+      //var mergedDoc = new Image();
+      //mergedDoc = mergeImages([awsimg, sigimg]).then(b64 => document.querySelector('img').src = b64);;
         //const { name: fileName, type: mimeType } = sigCanvas.current.getTrimmedCanvas().toDataURL("image/jpeg");
-      const { name: fileName, type: mimeType } = mergedDoc;
+      let mergedDoc = mergeImages(['/body.png', '/eyes.png', '/mouth.png']);
+      /*const { name: fileName, type: mimeType } = mergedDoc;
       const key = `${uuid()}${fileName}`
       const fileForUpload = {
         bucket,
@@ -108,7 +120,7 @@ function App() {
       await Storage.put(key, file, {
         contentType: mimeType
       })
-      //setImageURL(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png"));
+      //setImageURL(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png"));*/
       setImageURL(mergedDoc.toDataURL("image/png"));
     } catch (err) {
       console.log('error: ', err)
@@ -137,6 +149,29 @@ function App() {
      dispatch({ type: 'SET_DOCUMENTS', documents })
     } catch(err) {
       console.log('error fetching documents')
+    }
+  }
+  async function createSignedDocument(event) {
+    event.preventDefault()
+    if (file) {
+        const { name: fileName, type: mimeType } = file  
+        const key = `${uuid()}${fileName}`
+        const fileForUpload = {
+            bucket,
+            key,
+            region,
+        }
+        const inputData = { docimage: fileForUpload }
+
+        try {
+          await Storage.put(key, file, {
+            contentType: mimeType
+          })
+          await API.graphql(graphqlOperation(CreateSignedDocument, { input: inputData }))
+          console.log('successfully stored signed document data!')
+        } catch (err) {
+          console.log('error: ', err)
+        }
     }
   }
 

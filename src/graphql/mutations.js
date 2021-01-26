@@ -164,7 +164,6 @@ export const createSignedDocument = /* GraphQL */ `
   ) {
     createSignedDocument(input: $input, condition: $condition) {
       id
-      signdocname
       signdocimage {
         bucket
         region
@@ -182,7 +181,6 @@ export const updateSignedDocument = /* GraphQL */ `
   ) {
     updateSignedDocument(input: $input, condition: $condition) {
       id
-      signdocname
       signdocimage {
         bucket
         region
@@ -200,7 +198,6 @@ export const deleteSignedDocument = /* GraphQL */ `
   ) {
     deleteSignedDocument(input: $input, condition: $condition) {
       id
-      signdocname
       signdocimage {
         bucket
         region

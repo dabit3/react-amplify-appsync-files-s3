@@ -20,7 +20,6 @@ type Document @model {
 
 type SignedDocument @model {
   id: ID!
-  signdocname: String!
   signdocimage: S3Object
 }
 
