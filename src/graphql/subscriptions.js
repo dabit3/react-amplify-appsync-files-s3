@@ -1,45 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateProduct = /* GraphQL */ `
-  subscription OnCreateProduct {
-    onCreateProduct {
-      id
-      name
-      description
-      price
-      image
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateProduct = /* GraphQL */ `
-  subscription OnUpdateProduct {
-    onUpdateProduct {
-      id
-      name
-      description
-      price
-      image
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteProduct = /* GraphQL */ `
-  subscription OnDeleteProduct {
-    onDeleteProduct {
-      id
-      name
-      description
-      price
-      image
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser {
     onCreateUser {
@@ -121,6 +82,81 @@ export const onDeleteDocument = /* GraphQL */ `
       id
       docname
       docimage {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateSignature = /* GraphQL */ `
+  subscription OnCreateSignature {
+    onCreateSignature {
+      id
+      user {
+        id
+        username
+        avatar {
+          bucket
+          region
+          key
+        }
+        createdAt
+        updatedAt
+      }
+      sigimage {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateSignature = /* GraphQL */ `
+  subscription OnUpdateSignature {
+    onUpdateSignature {
+      id
+      user {
+        id
+        username
+        avatar {
+          bucket
+          region
+          key
+        }
+        createdAt
+        updatedAt
+      }
+      sigimage {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteSignature = /* GraphQL */ `
+  subscription OnDeleteSignature {
+    onDeleteSignature {
+      id
+      user {
+        id
+        username
+        avatar {
+          bucket
+          region
+          key
+        }
+        createdAt
+        updatedAt
+      }
+      sigimage {
         bucket
         region
         key

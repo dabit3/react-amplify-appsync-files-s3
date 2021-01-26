@@ -1,39 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getProduct = /* GraphQL */ `
-  query GetProduct($id: ID!) {
-    getProduct(id: $id) {
-      id
-      name
-      description
-      price
-      image
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listProducts = /* GraphQL */ `
-  query ListProducts(
-    $filter: ModelProductFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listProducts(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        description
-        price
-        image
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
@@ -97,6 +64,58 @@ export const listDocuments = /* GraphQL */ `
         id
         docname
         docimage {
+          bucket
+          region
+          key
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getSignature = /* GraphQL */ `
+  query GetSignature($id: ID!) {
+    getSignature(id: $id) {
+      id
+      user {
+        id
+        username
+        avatar {
+          bucket
+          region
+          key
+        }
+        createdAt
+        updatedAt
+      }
+      sigimage {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listSignatures = /* GraphQL */ `
+  query ListSignatures(
+    $filter: ModelSignatureFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSignatures(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        user {
+          id
+          username
+          createdAt
+          updatedAt
+        }
+        sigimage {
           bucket
           region
           key

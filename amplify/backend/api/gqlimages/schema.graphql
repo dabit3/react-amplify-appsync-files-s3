@@ -1,11 +1,3 @@
-type Product @model {
-  id: ID!
-  name: String!
-  description: String
-  price: Int
-  image: String
-}
-
 type User @model {
   id: ID!
   username: String!

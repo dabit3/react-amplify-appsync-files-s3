@@ -1,54 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createProduct = /* GraphQL */ `
-  mutation CreateProduct(
-    $input: CreateProductInput!
-    $condition: ModelProductConditionInput
-  ) {
-    createProduct(input: $input, condition: $condition) {
-      id
-      name
-      description
-      price
-      image
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateProduct = /* GraphQL */ `
-  mutation UpdateProduct(
-    $input: UpdateProductInput!
-    $condition: ModelProductConditionInput
-  ) {
-    updateProduct(input: $input, condition: $condition) {
-      id
-      name
-      description
-      price
-      image
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteProduct = /* GraphQL */ `
-  mutation DeleteProduct(
-    $input: DeleteProductInput!
-    $condition: ModelProductConditionInput
-  ) {
-    deleteProduct(input: $input, condition: $condition) {
-      id
-      name
-      description
-      price
-      image
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const createUser = /* GraphQL */ `
   mutation CreateUser(
     $input: CreateUserInput!
@@ -148,6 +100,90 @@ export const deleteDocument = /* GraphQL */ `
       id
       docname
       docimage {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createSignature = /* GraphQL */ `
+  mutation CreateSignature(
+    $input: CreateSignatureInput!
+    $condition: ModelSignatureConditionInput
+  ) {
+    createSignature(input: $input, condition: $condition) {
+      id
+      user {
+        id
+        username
+        avatar {
+          bucket
+          region
+          key
+        }
+        createdAt
+        updatedAt
+      }
+      sigimage {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateSignature = /* GraphQL */ `
+  mutation UpdateSignature(
+    $input: UpdateSignatureInput!
+    $condition: ModelSignatureConditionInput
+  ) {
+    updateSignature(input: $input, condition: $condition) {
+      id
+      user {
+        id
+        username
+        avatar {
+          bucket
+          region
+          key
+        }
+        createdAt
+        updatedAt
+      }
+      sigimage {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteSignature = /* GraphQL */ `
+  mutation DeleteSignature(
+    $input: DeleteSignatureInput!
+    $condition: ModelSignatureConditionInput
+  ) {
+    deleteSignature(input: $input, condition: $condition) {
+      id
+      user {
+        id
+        username
+        avatar {
+          bucket
+          region
+          key
+        }
+        createdAt
+        updatedAt
+      }
+      sigimage {
         bucket
         region
         key

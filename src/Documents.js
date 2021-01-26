@@ -4,15 +4,14 @@ import { Storage, API, graphqlOperation } from 'aws-amplify'
 import { createDocument as CreateDocument } from './graphql/mutations'
 import { listDocuments } from './graphql/queries'
 import { onCreateDocument } from './graphql/subscriptions'
-import { createSignedDocument as CreateSignedDocument } from './graphql/mutations'
-import { listSignedDocuments } from './graphql/queries'
-import { onCreateSignedDocument } from './graphql/subscriptions'
+import { createSignature as CreateSignature } from './graphql/mutations'
+import { listSignatures } from './graphql/queries'
+import { onCreateSignature } from './graphql/subscriptions'
 import config from './aws-exports'
 import uuid from 'uuid/v4'
 import Popup from "reactjs-popup";
 import SignaturePad from "react-signature-canvas";
 import './sigCanvas.css';
-import mergeImages from 'merge-images';
 
 const {
   aws_user_files_s3_bucket_region: region,
@@ -37,8 +36,8 @@ function reducer(state, action) {
 }
 
 function App() {
-  const [imageURL, setImageURL] = useState(null); // create a state that will contain our image url
-  const sigCanvas = useRef({}); //create a ref using react useRef hook
+  const [imageURL, setImageURL] = useState(null) // create a state that will contain our image url
+  const sigCanvas = useRef({}) //create a ref using react useRef hook
   const [file, updateFile] = useState(null)
   const [docname, updateDocname] = useState('')
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -47,85 +46,6 @@ function App() {
     /* a function that uses the canvas ref to clear the canvas via a method given by react-signature-canvas
   */
  const clear = () => sigCanvas.current.clear();
-
-  /*function getDataUrl(img) {
-    // Create canvas
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    // Set width and height
-    canvas.width = img.width;
-    canvas.height = img.height;
-    // Draw the image
-    ctx.drawImage(img, 0, 0);
-    return canvas.toDataURL('image/jpeg');
-  }*/
-
-  async function upload() {
-    console.log(documentUrl);
-    /*const download = require('image-downloader')
-
-    const options = {
-      url: documentUrl,
-      dest: '/tmpimg/tmpdoc'                // will be saved to /path/to/dest/image.jpg
-    }
-
-    download.image(options)
-      .then(({ filename }) => {
-        console.log('Saved to', filename)  // saved to /path/to/dest/image.jpg
-      })
-      .catch((err) => console.error(err))*/
-    //var docOpen = document.getElementById('currentDoc');
-    //var myimg = docOpen.getElementsByTagName('img')[0];
-    var mysrc1 = documentUrl.split("public/");
-    var mysrc2 = mysrc1[1].split("?");
-    //console.log(mysrc2[0]);
-    var awsimg = new Image();
-    //document.write();
-    try {
-      const imageData = await Storage.get(mysrc2[0])
-      awsimg = imageData.Body
-      alert("Loaded " + imageData.ContentLength + " bytes");
-    } catch(err) {
-      console.log('error: ', err)
-    }
-    /*var s3 = new config.S3();
-    s3.getObject(
-      { Bucket: bucket, Key: mysrc2[0] },
-      function (error, data) {
-        if (error != null) {
-          alert("Failed to retrieve an object: " + error);
-        } else {
-          alert("Loaded " + data.ContentLength + " bytes");
-          // do something with data.Body
-          awsimg = data.Body;
-        }
-      }
-    );*/
-    try {
-      //awsimg = fetchImage(mysrc2[0]);
-      //awsimg.src = documentUrl;
-      let sigimg = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png");
-      //var mergedDoc = new Image();
-      //mergedDoc = mergeImages([awsimg, sigimg]).then(b64 => document.querySelector('img').src = b64);;
-        //const { name: fileName, type: mimeType } = sigCanvas.current.getTrimmedCanvas().toDataURL("image/jpeg");
-      //let mergedDoc = mergeImages(['/body.png', '/eyes.png', '/mouth.png']);
-      /*const { name: fileName, type: mimeType } = mergedDoc;
-      const key = `${uuid()}${fileName}`
-      const fileForUpload = {
-        bucket,
-        key,
-        region,
-      }
-      //const inputData = { docname, docimage: fileForUpload }
-      await Storage.put(key, file, {
-        contentType: mimeType
-      })
-      //setImageURL(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png"));*/
-      //setImageURL(mergedDoc.toDataURL("image/png"));
-    } catch (err) {
-      console.log('error: ', err)
-    }
-  };
 
   function handleChange(event) {
     const { target: { value, files } } = event
@@ -152,34 +72,36 @@ function App() {
     }
   }
   async function createSignedDocument(event) {
-    event.preventDefault()
-    if (file) {
-        const { name: fileName, type: mimeType } = file  
-        const key = `${uuid()}${fileName}`
+    /* TODO: use Lambda SHARP image transforms to perform image merging - document signing and store on S3
+     * TODO: store the s3 object graphql 
+     */
+  }
+
+  async function createSignature(event) {
+        const { type: mimeType } = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png")
+        const key = `${uuid()}-signature`
         const fileForUpload = {
             bucket,
             key,
             region,
         }
-        const inputData = { docimage: fileForUpload }
-
+        const inputData = { sigimage: fileForUpload }
         try {
-          await Storage.put(key, file, {
+          await Storage.put(key, sigCanvas.current.getTrimmedCanvas().toDataURL("image/png"), {
             contentType: mimeType
           })
-          await API.graphql(graphqlOperation(CreateSignedDocument, { input: inputData }))
-          console.log('successfully stored signed document data!')
+          await API.graphql(graphqlOperation(CreateSignature, { input: inputData }))
+          console.log('successfully stored signature data!')
         } catch (err) {
           console.log('error: ', err)
         }
-    }
   }
 
   async function createDocument(event) {
     event.preventDefault()
     if (!docname) return alert('please enter a document name')
     if (file && docname) {
-        const { name: fileName, type: mimeType } = file  
+        const { name: fileName, type: mimeType } = file
         const key = `${uuid()}${fileName}`
         const fileForUpload = {
             bucket,
@@ -244,10 +166,10 @@ function App() {
       <div id="currentDoc">
       <img
         src={documentUrl}
-        style={{ width: 1000 }}
+        style={{ width: 300 }}
       />
       </div>
-      <h1>Signature Pad Example</h1>
+      <h1>Create a signature</h1>
       <Popup 
         modal 
         trigger={<button>Open Signature Pad</button>}
@@ -255,14 +177,13 @@ function App() {
       >
         {close => (
           <>
-          <SignaturePad 
+          <SignaturePad
             ref={sigCanvas}
             canvasProps={{
               className: "signatureCanvas"
             }}
           />
-          
-          <button onClick={upload}>Save</button>
+          <button onClick={createSignature}>Save</button>
           <button onClick={clear}>clear</button>
           <button onClick={close}>close</button>
           </>
