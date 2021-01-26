@@ -108,7 +108,7 @@ function App() {
       //var mergedDoc = new Image();
       //mergedDoc = mergeImages([awsimg, sigimg]).then(b64 => document.querySelector('img').src = b64);;
         //const { name: fileName, type: mimeType } = sigCanvas.current.getTrimmedCanvas().toDataURL("image/jpeg");
-      let mergedDoc = mergeImages(['/body.png', '/eyes.png', '/mouth.png']);
+      //let mergedDoc = mergeImages(['/body.png', '/eyes.png', '/mouth.png']);
       /*const { name: fileName, type: mimeType } = mergedDoc;
       const key = `${uuid()}${fileName}`
       const fileForUpload = {
@@ -121,7 +121,7 @@ function App() {
         contentType: mimeType
       })
       //setImageURL(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png"));*/
-      setImageURL(mergedDoc.toDataURL("image/png"));
+      //setImageURL(mergedDoc.toDataURL("image/png"));
     } catch (err) {
       console.log('error: ', err)
     }

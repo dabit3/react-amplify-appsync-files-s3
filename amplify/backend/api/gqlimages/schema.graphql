@@ -18,6 +18,12 @@ type Document @model {
   docimage: S3Object
 }
 
+type Signature @model {
+  id: ID!
+  user: User
+  sigimage: S3Object
+}
+
 type SignedDocument @model {
   id: ID!
   signdocimage: S3Object
