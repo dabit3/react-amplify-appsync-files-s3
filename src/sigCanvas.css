@@ -1,5 +1,17 @@
 .signatureCanvas {
   border: 1px solid black;
-  width: 100%;
-  min-height: 500px;
+  width: 200px;
+  min-height: 100px;
+  float:right;
+}
+
+.leftCol {
+  width:75%;
+  display: inline;
+}
+
+.rightCol {
+  width:40%;
+  display:inline;
+  float:right;
 }

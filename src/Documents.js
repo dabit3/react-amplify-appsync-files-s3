@@ -13,6 +13,7 @@ import Popup from "reactjs-popup";
 import SignaturePad from "react-signature-canvas";
 import './sigCanvas.css';
 import { Auth } from 'aws-amplify';
+import Draggable from 'react-draggable';
 
 const {
   aws_user_files_s3_bucket_region: region,
@@ -75,6 +76,16 @@ function App() {
     } catch(err) {
       console.log('error: ', err)
     }
+  }
+
+  async function openDraggableSignature() {
+    return (
+      <Draggable>
+      <div>
+        <p>DRAG ME!</p>
+      </div>
+    </Draggable>
+    );
   }
 
   async function fetchDocuments() {
@@ -151,6 +162,7 @@ function App() {
   }, [])
 
   return (
+    <div class="leftCol">
     <div style={styles.container}>
       <input
         label="File to upload"
@@ -180,11 +192,19 @@ function App() {
         })
       }
       <div id="currentDoc">
+      <button onClick={() => openDraggableSignature()}>Sign this document</button>
+      <Draggable>
+      <div>
+        <p>DRAG ME! I AM YOUR SIGNATURE!</p>
+      </div>
+    </Draggable>
       <img
         src={documentUrl}
         style={{ width: 300 }}
       />
       </div>
+      </div>
+      <div class="rightCol">
       <h1>Create a signature</h1>
       <Popup 
         modal 
@@ -213,12 +233,13 @@ function App() {
           alt="my signature"
           style= {{
             display: "block",
-            margin: "0 auto",
+            float:"right",
             border: "1px solid black",
             width: "150px"
           }}
         />
       ) : null}
+    </div>
     </div>
   )
 
@@ -245,7 +266,7 @@ function App() {
 const styles = {
   container: {
     width: 300,
-    margin: '0 auto'
+    display:'inline-block'
   },
   docname: {
     cursor: 'pointer',

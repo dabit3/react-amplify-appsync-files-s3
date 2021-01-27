@@ -10,6 +10,7 @@
     "merge-images": "^2.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-draggable": "^4.4.3",
     "react-scripts": "3.0.1",
     "react-signature-canvas": "^1.0.3",
     "reactjs-popup": "^2.0.4",
