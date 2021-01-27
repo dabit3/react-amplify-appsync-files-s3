@@ -13,7 +13,7 @@ import Popup from "reactjs-popup";
 import SignaturePad from "react-signature-canvas";
 import './sigCanvas.css';
 import { Auth } from 'aws-amplify';
-import Draggable from 'react-draggable';
+import DocumentSign from './components/documentSign'
 
 const {
   aws_user_files_s3_bucket_region: region,
@@ -21,7 +21,8 @@ const {
 } = config
 
 const initialState = {
-  documents: []
+  documents: [],
+  signeddocuments: []
 }
 
 //var currentDocOpen = [];
@@ -44,8 +45,8 @@ function App() {
     let accessToken = res.getAccessToken()
     let jwt = accessToken.getJwtToken()
     //You can print them to see the full objects
-    console.log(`myAccessToken: ${JSON.stringify(accessToken)}`)
-    console.log(`myJwt: ${jwt}`)
+    //console.log(`myAccessToken: ${JSON.stringify(accessToken)}`)
+    //console.log(`myJwt: ${jwt}`)
     let accesstokenstring = JSON.stringify(accessToken);
     let accessbreak1 = accesstokenstring.split(`username":"`);
     let accessbreak2 = accessbreak1[1].split(`"}}`)
@@ -58,7 +59,9 @@ function App() {
   const [docname, updateDocname] = useState('')
   const [state, dispatch] = useReducer(reducer, initialState)
   const [documentUrl, updateDocumentUrl] = useState('')
+  //const [documentOpen, setDocumentOpen] = useState(false);
 
+  
     /* a function that uses the canvas ref to clear the canvas via a method given by react-signature-canvas
   */
  const clear = () => sigCanvas.current.clear();
@@ -78,16 +81,6 @@ function App() {
     }
   }
 
-  async function openDraggableSignature() {
-    return (
-      <Draggable>
-      <div>
-        <p>DRAG ME!</p>
-      </div>
-    </Draggable>
-    );
-  }
-
   async function fetchDocuments() {
     try {
      let documents = await API.graphql(graphqlOperation(listDocuments))
@@ -100,10 +93,20 @@ function App() {
   async function createSignedDocument(event) {
     /* TODO: use Lambda SHARP image transforms to perform image merging - document signing and store on S3
      * TODO: store the s3 object graphql 
+     * TODO: get active document open and write to local storage
+     * TODO: get active signature open and write to local storage
+     * TODO: combine two files and create new signeddocument
+     * TODO: upload signeddocument to S3
      */
+    console.log("signing document")
+    //draggableSignature - add user's signature
+    //signDoc - add button to sign document
   }
 
   async function createSignature() {
+    //TODO: update div with draggable signature
+    // draggableSignature
+
     const key = `${uuid()}-${username}-signature.png`
     const fileForUpload = {
         bucket,
@@ -186,18 +189,14 @@ function App() {
             >
               <p
                 style={styles.docname}
-               onClick={() => fetchImage(u.docimage.key)}>{u.docname}</p>
+                onClick={() => fetchImage(u.docimage.key)}>{u.docname}</p>
             </div>
           )
         })
       }
       <div id="currentDoc">
-      <button onClick={() => openDraggableSignature()}>Sign this document</button>
-      <Draggable>
-      <div>
-        <p>DRAG ME! I AM YOUR SIGNATURE!</p>
-      </div>
-    </Draggable>
+      <div id="signDoc"><DocumentSign></DocumentSign></div>
+      <div id="draggableSignature"></div>
       <img
         src={documentUrl}
         style={{ width: 300 }}
@@ -206,8 +205,8 @@ function App() {
       </div>
       <div class="rightCol">
       <h1>Create a signature</h1>
-      <Popup 
-        modal 
+      <Popup
+        modal
         trigger={<button>Open Signature Pad</button>}
         closeOnDocumentClick={false}
       >
