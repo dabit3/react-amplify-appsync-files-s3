@@ -121,6 +121,7 @@ export const getSignedDocument = /* GraphQL */ `
         region
         key
       }
+      username
       createdAt
       updatedAt
     }
@@ -140,6 +141,7 @@ export const listSignedDocuments = /* GraphQL */ `
           region
           key
         }
+        username
         createdAt
         updatedAt
       }

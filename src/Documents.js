@@ -23,7 +23,7 @@ const initialState = {
   documents: []
 }
 
-var currentDocOpen = [];
+//var currentDocOpen = [];
 
 function reducer(state, action) {
   switch(action.type) {
@@ -93,18 +93,18 @@ function App() {
   }
 
   async function createSignature() {
-   
-    const { type: mimeType } = sigCanvas.current.getTrimmedCanvas().toDataURL("image/png")
-    const key = `${uuid()}-${username}-signature`
+    const key = `${uuid()}-${username}-signature.png`
     const fileForUpload = {
         bucket,
         key,
         region,
     }
     const inputData = { username: username, sigimage: fileForUpload }
+    let buf = Buffer.from(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png").replace(/^data:image\/\w+;base64,/, ""),'base64')
     try {
-      await Storage.put(key, sigCanvas.current.getTrimmedCanvas().toDataURL("image/png"), {
-        contentType: mimeType
+      await Storage.put(key, buf, {
+        ContentType: 'image/png',
+        ContentEncoding: 'base64'
       })
       await API.graphql(graphqlOperation(CreateSignature, { input: inputData }))
       console.log('successfully stored signature data!')

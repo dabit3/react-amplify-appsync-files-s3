@@ -175,6 +175,7 @@ export const createSignedDocument = /* GraphQL */ `
         region
         key
       }
+      username
       createdAt
       updatedAt
     }
@@ -192,6 +193,7 @@ export const updateSignedDocument = /* GraphQL */ `
         region
         key
       }
+      username
       createdAt
       updatedAt
     }
@@ -209,6 +211,7 @@ export const deleteSignedDocument = /* GraphQL */ `
         region
         key
       }
+      username
       createdAt
       updatedAt
     }

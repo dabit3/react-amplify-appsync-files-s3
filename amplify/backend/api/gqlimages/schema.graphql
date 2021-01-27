@@ -19,6 +19,7 @@ type Signature @model {
 type SignedDocument @model {
   id: ID!
   signdocimage: S3Object
+  username: String!
 }
 
 type S3Object {
