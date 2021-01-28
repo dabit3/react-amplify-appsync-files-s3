@@ -13,7 +13,7 @@ import Popup from "reactjs-popup";
 import SignaturePad from "react-signature-canvas";
 import './sigCanvas.css';
 import { Auth } from 'aws-amplify';
-import DocumentSign from './components/documentSign'
+import SignDocument from './components/SignDocument'
 
 const {
   aws_user_files_s3_bucket_region: region,
@@ -24,8 +24,6 @@ const initialState = {
   documents: [],
   signeddocuments: []
 }
-
-//var currentDocOpen = [];
 
 function reducer(state, action) {
   switch(action.type) {
@@ -59,7 +57,7 @@ function App() {
   const [docname, updateDocname] = useState('')
   const [state, dispatch] = useReducer(reducer, initialState)
   const [documentUrl, updateDocumentUrl] = useState('')
-  //const [documentOpen, setDocumentOpen] = useState(false);
+  const [documentOpen, setDocumentOpen] = useState(false);
 
   
     /* a function that uses the canvas ref to clear the canvas via a method given by react-signature-canvas
@@ -73,9 +71,11 @@ function App() {
   }
 
   async function fetchImage(key) {
+    //
     try {
       const imageData = await Storage.get(key)
       updateDocumentUrl(imageData)
+      setDocumentOpen(true);
     } catch(err) {
       console.log('error: ', err)
     }
@@ -195,11 +195,10 @@ function App() {
         })
       }
       <div id="currentDoc">
-      <div id="signDoc"><DocumentSign></DocumentSign></div>
-      <div id="draggableSignature"></div>
+      { documentOpen ? <SignDocument></SignDocument> : <></> }
       <img
         src={documentUrl}
-        style={{ width: 300 }}
+        style={{ width: 1000 }}
       />
       </div>
       </div>
