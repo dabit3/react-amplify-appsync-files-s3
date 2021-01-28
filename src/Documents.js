@@ -189,7 +189,8 @@ function App() {
             >
               <p
                 style={styles.docname}
-                onClick={() => fetchImage(u.docimage.key)}>{u.docname}</p>
+                onClick={() => fetchImage(u.docimage.key)}>{u.docname}&nbsp;<button>Delete</button></p>
+                
             </div>
           )
         })

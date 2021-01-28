@@ -6,14 +6,12 @@ import './signDoc.css';
 class SignDocument extends React.Component {
   render (){    
     return (
-      <div id="signDocument">
-      <button>Sign</button>
       <div id="draggableSignature">
         <Draggable>
-          <div>I can now be moved around!</div>
+          <div>Drag your signature to place it &nbsp;<button>Sign</button></div>
         </Draggable>
       </div>
-      </div>
+
     );
   }
 };
