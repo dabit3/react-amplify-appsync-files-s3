@@ -70,24 +70,6 @@ npm start
 }
 ```
 
-6. Render either the private (Users) or public (Products) example in __src/App.js__:
-
-```javascript
-import React from 'react'
-import Products from './Products'
-import Users from './Users'
-
-function App() {
-  return (
-    <Users />
-    // or <Products />
-  )
-}
-
-export default App;
-
-```
-
 ### Amplify Console
 
 Click the button to deploy this application to the Amplify console.

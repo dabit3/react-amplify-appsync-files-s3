@@ -11,7 +11,6 @@ class SignDocument extends React.Component {
           <div>Drag your signature to place it &nbsp;<button>Sign</button></div>
         </Draggable>
       </div>
-
     );
   }
 };
